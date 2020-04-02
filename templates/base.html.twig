@@ -12,25 +12,70 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <span class="navbar-brand">Admin</span>
-            </div>
-        </nav>
+        {# s'il y a un utilisateur connecté et qu'il a le rôle ROLE_ADMIN #}
+        {% if is_granted('ROLE_ADMIN') %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container">
+                    <span class="navbar-brand">Admin</span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarAdminContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbarAdminContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_admin_category_index') }}">
+                                Gestion catégories
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_admin_article_index') }}">
+                                Gestion articles
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        {% endif %}
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="{{ path('app_index_index') }}">Blog</a>
                 {# affiche le rendu de la méthode menu() de CategoryController #}
                 {{ render(controller('App\\Controller\\CategoryController::menu')) }}
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_user_register') }}">
-                            Inscription
-                        </a>
-                    </li>
+                    {# app.user = l'utilisateur connecté #}
+                    {# app.user is null = l'utilisateur n'est pas connecté #}
+                    {% if app.user is null %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_user_register') }}">
+                                Inscription
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_user_login') }}">
+                                Connexion
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <span class="navbar-text">
+                                {{ app.user }}
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_user_logout') }}">
+                                Déconnexion
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
+
 
 
         <div class="container">
@@ -52,15 +97,7 @@
         </div>
 
 
-        <div class="collapse navbar-collapse" id="navbarAdminContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_admin_category_index') }}">
-                        Gestion catégories
-                    </a>
-                </li>
-            </ul>
-        </div>
+
 
 
 

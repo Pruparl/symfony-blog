@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Gestion articles</h1>
+
+    <a href="{{ path('app_admin_category_edit') }}" class="btn btn-outline-primary mb-3">
+        Rédiger un article
+    </a>
+
+    <table class="table table-stripped">
+        <tr class="table-dark">
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Date pub.</th>
+            <th>Catégorie</th>
+            <th>Auteur</th>
+            <th width="250px"></th>
+        </tr>
+        {% for article in articles %}
+            <tr>
+                <th>{{ article.id }}</th>
+                <th>{{ article.title }}</th>
+                <th>{{ article.publicationDate|date('d/m/Y H:i') }}</th>
+                <th>{{ article.category }}</th>
+                <th>{{ article.author }}</th>
+                <th></th>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
