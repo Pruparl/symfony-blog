@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Gestion articles</h1>
 
-    <a href="{{ path('app_admin_category_edit') }}" class="btn btn-outline-primary mb-3">
+    <a href="{{ path('app_admin_article_edit') }}" class="btn btn-outline-primary mb-3">
         Rédiger un article
     </a>
 
@@ -17,14 +17,21 @@
             <th width="250px"></th>
         </tr>
         {% for article in articles %}
-            <tr>
-                <th>{{ article.id }}</th>
-                <th>{{ article.title }}</th>
-                <th>{{ article.publicationDate|date('d/m/Y H:i') }}</th>
-                <th>{{ article.category }}</th>
-                <th>{{ article.author }}</th>
-                <th></th>
-            </tr>
+        <tr>
+            <td>{{ article.id }}</td>
+            <td>{{ article.title }}</td>
+            <td>{{ article.publicationDate|date('d/m/Y H:i') }}</td>
+            <td>{{ article.category }}</td>
+            <td>{{ article.author }}</td>
+            <td>
+                <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}" class="btn btn-primary">
+                    Modifier
+                </a>
+                <a href="{{ path('app_admin_article_delete', {'id': article.id}) }}" class="btn btn-danger">
+                    Supprimer
+                </a>
+            </td>
+        </tr>
         {% endfor %}
     </table>
 {% endblock %}

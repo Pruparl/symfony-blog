@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,6 +41,16 @@ class ArticleType extends AbstractType
                     'choice_label' => 'name',
                     // pour avoir une 1ère option vide et obligez l'utilisateur à choisir
                     'placeholder' => 'Choisissez une catégorie'
+                ]
+            )
+            ->add(
+                'image',
+                // input type file
+                FileType::class,
+                [
+                    'label' => 'Illustration',
+                    // champ optionnel
+                    'required' => false
                 ]
             )
         ;

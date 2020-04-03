@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}{{ parent() }} - Accueil{% endblock %}
+
+{% block body %}
+    <h1>Accueil</h1>
+
+    <h2>Derniers articles</h2>
+    {% include 'article/article/_list.html.twig' with {'articles': articles} only %}
+{% endblock %}
