@@ -13,7 +13,6 @@ class IndexController extends AbstractController
      */
     public function index(ArticleRepository $repository)
     {
-        return $this->render('index/index.html.twig');
 
         /**
          * Faire une page article dans un contrôleur ArticleController

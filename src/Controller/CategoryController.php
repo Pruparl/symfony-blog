@@ -19,23 +19,29 @@ class CategoryController extends AbstractController
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function index(Category $category)
+    public function index(ArticleRepository $repository, Category $category)
     {
+        // les 3 derniers articles de la catégorie
+        $articles = $repository->findBy(
+            ['category' => $category],
+            ['publicationDate' => 'ASC'],
+            3
+        );
+
         return $this->render(
             'category/index.html.twig',
             [
                 'category' => $category,
+                'articles' => $articles
             ]
         );
     }
 
-    public function menu(ArticleRepository $repository, CategoryRepository $repository)
+    public function menu(CategoryRepository $repository)
     {
-        // les 3 derniers articles de la catégorie
         $categories = $repository->findBy(
-            ['category' => $category],
-            ['publicationDate' => 'ASC'],
-            3
+            [],
+            ['id' => 'ASC']
         );
 
 
@@ -43,7 +49,6 @@ class CategoryController extends AbstractController
             'category/menu.html.twig',
             [
                 'categories' => $categories,
-                'articles' => $articles
             ]
         );
     }

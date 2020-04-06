@@ -142,7 +142,13 @@ class ArticleController extends AbstractController
         if(!is_null($article->getImage())){
             // suppression de l'image si l'article en a une
             unlink($this->getParameter('upload_dir') . $article->setImage());
+
+            if(file_exists($image)) {
+                unlink($image);
+            }
         }
+
+
         // suppression en bdd
         $manager->remove($article);
         $manager->flush();

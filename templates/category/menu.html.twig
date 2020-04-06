@@ -6,7 +6,7 @@
     <ul class="navbar-nav mr-auto">
         {% for category in categories %}
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_admin_category_index', {'id': category.id}) }}">
+            <a class="nav-link" href="{{ path('app_category_index', {'id': category.id}) }}">
                 {{ category }}
             </a>
         </li>

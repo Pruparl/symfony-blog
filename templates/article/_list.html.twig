@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
-
-{% block titre %}{{ parent() }} - Accueil{% endblock %}
-
-{% block body %}
-    <h1>Accueil</h1>
-
-    <h2>Derniers articles</h2>
-    {% include 'article/article/_list.html.twig' with {'articles': articles} only %}
-{% endblock %}
+<div class="list-group list-group-flush">
+    {% for article in articles %}
+        <a class="list-group-item"
+           href="{{ path('app_article_index', {'id': article.id}) }}">
+            {{ article.title }}
+        </a>
+    {% else %}
+        <p>Aucun article.</p>
+    {% endfor %}
+</div>
