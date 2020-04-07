@@ -53,7 +53,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     * @Assert\File(mimeTypes={"image/png", "image/jpeg"}
+     * @Assert\File(mimeTypes={"image/png", "image/jpeg"},
      *     mimeTypesMessage="Le fichier doit être une image JPG ou PNG",
      *     maxSize="600k",
      *     maxSizeMessage="L'image ne doit pas pas dépasser {{ limit }}{{ suffix }}")

@@ -3,10 +3,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Article;
 use App\Entity\Comment;
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class CommentController
@@ -15,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommentController extends AbstractController
 {
     /**
-     * @Route('"/article/{id}')
+     * @Route("/article/{id}")
      */
     public function index(Article $article)
     {
